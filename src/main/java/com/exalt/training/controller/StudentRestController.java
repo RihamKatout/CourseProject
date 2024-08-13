@@ -34,6 +34,9 @@ public class StudentRestController {
         return allStudent.get(studentId);
     }
 
+
+    // remove these exception handlers if you want to use @ControllerAdvice
+
     @ExceptionHandler
     public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException e){
 
