@@ -17,7 +17,7 @@ public class CourseCodeValidator implements ConstraintValidator<CourseCode, Stri
         // spring MVC will call this
         // constraintValidatorContext -> additional info
 
-        if(theCode == null)return false;
+        if(theCode == null)return true;
         return theCode.startsWith(coursePrefix);
     }
 }
