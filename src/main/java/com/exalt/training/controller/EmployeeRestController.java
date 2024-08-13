@@ -2,6 +2,7 @@ package com.exalt.training.controller;
 
 import com.exalt.training.dao.EmployeeDAO;
 import com.exalt.training.entity.Employee;
+import com.exalt.training.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,16 +14,22 @@ import java.util.List;
 @RequestMapping("/api/employees")
 public class EmployeeRestController {
 
-    private EmployeeDAO employeeDAO;
+//    private EmployeeDAO employeeDAO;
+    private EmployeeService employeeService;
 
-    public EmployeeRestController(EmployeeDAO employeeDAO) {
-        this.employeeDAO = employeeDAO;
-    }
+//    public EmployeeRestController(EmployeeDAO employeeDAO) {
+//        this.employeeDAO = employeeDAO;
+//    }
+
 
     @Autowired
+    public EmployeeRestController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
 
     @GetMapping("")
     public List<Employee> getAllEmployees(){
-        return employeeDAO.findALL();
+//        return employeeDAO.findALL();
+        return employeeService.findAll();
     }
 }
