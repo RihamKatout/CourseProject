@@ -1,11 +1,12 @@
 package com.exalt.training.controller;
 
 import com.exalt.training.entity.Student;
+import com.exalt.training.error_response.StudentErrorResponse;
+import com.exalt.training.exception.StudentNotFoundException;
 import jakarta.annotation.PostConstruct;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,31 @@ public class StudentRestController {
 
     @GetMapping("/students/{studentId}")
     public Student getStudentById(@PathVariable int studentId){
+        if(studentId>=allStudent.size() || studentId<0)
+            throw new StudentNotFoundException("Student id not found: "+studentId);
         return allStudent.get(studentId);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException e){
+
+        //create a StudentErrorResponse & return it
+        StudentErrorResponse response = new StudentErrorResponse();
+        response.setStatus(HttpStatus.NOT_FOUND.value());
+        response.setMessage(e.getMessage());
+        response.setTimestamp(System.currentTimeMillis());
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    // to catch any type exception
+    @ExceptionHandler
+    public ResponseEntity<StudentErrorResponse> handleException(Exception e){
+
+        //create a StudentErrorResponse & return it
+        StudentErrorResponse response = new StudentErrorResponse();
+        response.setStatus(HttpStatus.BAD_REQUEST.value());
+        response.setMessage(e.getMessage());
+        response.setTimestamp(System.currentTimeMillis());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }
