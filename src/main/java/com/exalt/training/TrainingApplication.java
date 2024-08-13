@@ -23,6 +23,8 @@ public class TrainingApplication {
 			readAllStudents(studentDAO);
 			findStudentsByLastName(studentDAO);
 			updateStudent(studentDAO);
+			deleteStudentWithId(studentDAO);
+			deleteAllStudents(studentDAO);
 		};
 	}
 
@@ -63,5 +65,15 @@ public class TrainingApplication {
 		student.setLastName("Muneer");
 		studentDAO.update(student);
 		System.out.println("Updated student: " + student);
+	}
+
+
+	private void deleteAllStudents(StudentDAO studentDAO) {
+		System.out.println("Number of deleted students: " + studentDAO.deleteAll());
+	}
+
+	private void deleteStudentWithId(StudentDAO studentDAO) {
+		System.out.println("Deleting student with id = 3");
+		studentDAO.deleteById(3);
 	}
 }
