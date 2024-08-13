@@ -42,10 +42,12 @@ public class DemoSecurityConfig {
 //    }
     public UserDetailsManager userDetailsManager(DataSource dataSource){
 
-        // create users, authorities tables
-        // authorities must start with ROLE_**
-        // this method tell spring to use JDBC authentication with our data source
-        return new JdbcUserDetailsManager((dataSource));
+        // we want to use JDBC authentication, but we don't want to use default tables and columns
+        // give queries to access tables
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+        jdbcUserDetailsManager.setUsersByUsernameQuery("select user_id, pw, active from members where user_id=?");
+        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("select user_id, role from roles where user_id=?");
+        return jdbcUserDetailsManager;
     }
     // For restricting access based on roles
     @Bean
