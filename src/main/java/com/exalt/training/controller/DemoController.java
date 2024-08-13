@@ -19,7 +19,7 @@ public class DemoController {
 
     @GetMapping("/showMyLoginPage")
     public String showLoginPage(){
-        System.out.println("-----------------------------------------------------------------");
-        return "plain-login";
+//        return "plain-login";
+        return "fancy-login";
     }
 }
