@@ -18,13 +18,13 @@ public class TrainingApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
 		return runner -> {
-			Integer id = createStudent(studentDAO);
-			readStudent(studentDAO, id);
-			readAllStudents(studentDAO);
-			findStudentsByLastName(studentDAO);
-			updateStudent(studentDAO);
-			deleteStudentWithId(studentDAO);
-			deleteAllStudents(studentDAO);
+//			Integer id = createStudent(studentDAO);
+//			readStudent(studentDAO, id);
+//			readAllStudents(studentDAO);
+//			findStudentsByLastName(studentDAO);
+//			updateStudent(studentDAO);
+//			deleteStudentWithId(studentDAO);
+//			deleteAllStudents(studentDAO);
 		};
 	}
 
