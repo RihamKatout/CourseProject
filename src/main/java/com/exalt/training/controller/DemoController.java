@@ -16,4 +16,10 @@ public class DemoController {
     public String showHome(){
         return "home";
     }
+
+    @GetMapping("/showMyLoginPage")
+    public String showLoginPage(){
+        System.out.println("-----------------------------------------------------------------");
+        return "plain-login";
+    }
 }
