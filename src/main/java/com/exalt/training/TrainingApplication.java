@@ -22,6 +22,7 @@ public class TrainingApplication {
 			readStudent(studentDAO, id);
 			readAllStudents(studentDAO);
 			findStudentsByLastName(studentDAO);
+			updateStudent(studentDAO);
 		};
 	}
 
@@ -52,5 +53,15 @@ public class TrainingApplication {
 		System.out.println("These students where found:");
 		for(Student student : allStudents)
 			System.out.println(student);
+	}
+
+	private void updateStudent(StudentDAO studentDAO) {
+		int id = 1;
+		System.out.println("Getting student with id = " + id);
+		Student student = studentDAO.findById(id);
+		System.out.println("Student: " + student);
+		student.setLastName("Muneer");
+		studentDAO.update(student);
+		System.out.println("Updated student: " + student);
 	}
 }
