@@ -36,8 +36,7 @@ public class Course {
         students.addLast(student);
     }
 
-    public Course(Integer id, String title) {
-        this.id = id;
+    public Course(String title) {
         this.title = title;
     }
 

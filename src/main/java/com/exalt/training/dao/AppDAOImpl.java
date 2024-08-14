@@ -1,5 +1,6 @@
 package com.exalt.training.dao;
 
+import com.exalt.training.entity.Course;
 import com.exalt.training.entity.Instructor;
 import com.exalt.training.entity.InstructorDetail;
 import jakarta.persistence.EntityManager;
@@ -19,6 +20,12 @@ public class AppDAOImpl implements AppDAO{
     public void save(Instructor instructor) {
         // this will also save the details object; cascadeType = ALL
         entityManager.persist(instructor);
+    }
+
+    @Override
+    @Transactional
+    public void save(Course course) {
+        entityManager.persist(course);
     }
 
     @Override

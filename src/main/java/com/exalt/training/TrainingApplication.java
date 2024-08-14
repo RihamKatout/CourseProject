@@ -2,6 +2,7 @@ package com.exalt.training;
 
 import com.exalt.training.dao.AppDAO;
 import com.exalt.training.dao.StudentDAO;
+import com.exalt.training.entity.Course;
 import com.exalt.training.entity.Instructor;
 import com.exalt.training.entity.InstructorDetail;
 import com.exalt.training.entity.Student;
@@ -28,12 +29,15 @@ public class TrainingApplication {
 //			updateStudent(studentDAO);
 //			deleteStudentWithId(studentDAO);
 //			deleteAllStudents(studentDAO);
-
+/*
 			createInstructor(appDAO);
 			System.out.println(findInstructorById(appDAO));
 //			deleteInstructorById(appDAO);
 
 			System.out.println(findInstructorDetailById(appDAO));
+ */
+			createCourseAndStudents(appDAO);
+
 		};
 	}
 
@@ -105,5 +109,18 @@ public class TrainingApplication {
 
 	private InstructorDetail findInstructorDetailById(AppDAO appDAO){
 		return appDAO.findInstructorDetailById(2);
+	}
+
+	private void createCourseAndStudents(AppDAO appDAO){
+		Course course = new Course("spring boot course");
+		Student riham = new Student("riham", "katout", "riham@gmail.com");
+		Student siwar = new Student("siwar", "katout", "siwar@gmail.com");
+		course.addStudent(riham);
+		course.addStudent(siwar);
+
+		System.out.println("saving the course: " + course);
+		System.out.println("associated students: " + course.getStudents());
+		appDAO.save(course);
+		System.out.println("Dooooooooooooooneeeee");
 	}
 }
