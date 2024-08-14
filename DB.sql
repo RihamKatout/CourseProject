@@ -43,3 +43,57 @@ CREATE TABLE `roles`(
 ) ENGINE = InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `roles` VALUES ('riham', 'ROLE_ADMIN'), ('ahmad', 'ROLE_EMPLOYEE'), ('siwar', 'ROLE_MANAGER');
+
+
+DROP TABLE IF EXISTS `instructor_details`;
+CREATE TABLE `instructor_details`(
+	`id` INT NOT NULL auto_increment, 
+    `youtube_channel` varchar(128) DEFAULT NULL, 
+    `hobby` varchar(45) DEFAULT NULL, 	
+    PRIMARY KEY(`id`)
+) ENGINE=InnoDB auto_increment=1, DEFAULT charset=latin1;
+
+DROP TABLE IF EXISTS `instructor`;
+CREATE TABLE `instructor`(
+	`id` int(11) NOT NULL auto_increment,
+    `first_name` VARCHAR(45) DEFAULT NULL, 
+    `last_name` VARCHAR(45) DEFAULT NULL, 
+    `email` VARCHAR(45) DEFAULT NULL,
+    `instructor_detail_id` int(11) DEFAULT NULL, 
+    primary key(`id`), 
+    KEY `FX_detail_idx` (`instructor_detail_id`), constraint `FK_detail` foreign key (`instructor_detail_id`)
+    REFERENCES `instructor_details` (`id`)
+    ON DELETE NO ACTION ON UPDATE NO ACTION 
+) ENGINE=InnoDB auto_increment=1, DEFAULT charset=latin1;
+
+DROP TABLE IF EXISTS `course`;
+CREATE TABLE `course`(
+	`id` int(11) NOT NULL auto_increment, 
+    `title` VARCHAR(128) default NULL, 
+    `instructor_id` int(11) DEFAULT NULL, 
+    primary key(`id`), 
+    UNIQUE KEY `TITLE_UNIQUE` (`title`), 
+    KEY `FK_INSTRUCTOR_idx` (`instructor_id`),
+    CONSTRAINT `FX_INSTRUCTOR`
+    FOREIGN KEY (`instructor_id`)
+    REFERENCES `instructor` (`id`)
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION
+) ENGINE=InnoDB auto_increment=1, DEFAULT charset=latin1;
+
+DROP TABLE IF EXISTS `course_student`;
+CREATE TABLE `course_student`(
+	`course_id` int(11) NOT NULL, 
+	`student_id` int(11) NOT NULL,
+    PRIMARY KEY (`course_id`, `student_id`), 
+    KEY `FK_COURSE_idx` (`course_id`),
+    CONSTRAINT `FX_COURSE`
+    FOREIGN KEY (`course_id`)
+    REFERENCES `course` (`id`)
+    ON DELETE NO ACTION ON UPDATE NO ACTION, 
+    KEY `FK_STUDENT_idx` (`student_id`),
+    CONSTRAINT `FX_STUDENT`
+    FOREIGN KEY (`student_id`)
+    REFERENCES `student` (`id`)
+    ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB auto_increment=1, DEFAULT charset=latin1;

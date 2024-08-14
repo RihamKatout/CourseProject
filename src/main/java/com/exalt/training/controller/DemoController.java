@@ -11,4 +11,15 @@ public class DemoController {
         model.addAttribute("theDate", new java.util.Date());
         return "helloworld"; // --> src/main/resources/templates/helloworld.html
     }
+
+    @GetMapping("/home")
+    public String showHome(){
+        return "home";
+    }
+
+    @GetMapping("/showMyLoginPage")
+    public String showLoginPage(){
+//        return "plain-login";
+        return "fancy-login";
+    }
 }

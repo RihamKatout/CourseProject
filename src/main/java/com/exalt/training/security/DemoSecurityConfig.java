@@ -2,6 +2,7 @@ package com.exalt.training.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -49,25 +50,17 @@ public class DemoSecurityConfig {
         jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("select user_id, role from roles where user_id=?");
         return jdbcUserDetailsManager;
     }
-    // For restricting access based on roles
+
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        http.authorizeHttpRequests(configurer ->
-                configurer
-                        .requestMatchers(HttpMethod.GET, "/api/employees/**").hasRole("EMPLOYEE")
-                        .requestMatchers(HttpMethod.GET, "/api/employees/**").hasRole("EMPLOYEE")
-                        .requestMatchers(HttpMethod.POST, "/api/employees").hasRole("MANAGER")
-                        .requestMatchers(HttpMethod.PUT, "/api/employees").hasRole("MANAGER")
-                        .requestMatchers(HttpMethod.DELETE, "/api/employees/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "**").permitAll()
-        );
-
-        // use HTTP basic authentication
-        http.httpBasic(Customizer.withDefaults());
-
-        // disable Cross Site Request Forgery (CSRF)
-        http.csrf(csrf -> csrf.disable());
-
-        return http.build();
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.authorizeHttpRequests(configurer ->
+                        configurer.anyRequest().authenticated()
+                )
+                .formLogin(form ->
+                        form.loginPage("/showMyLoginPage")
+                                .loginProcessingUrl("/authenticateTheUser")
+                                .permitAll()
+                ).logout(LogoutConfigurer::permitAll);
+        return httpSecurity.build();
     }
 }

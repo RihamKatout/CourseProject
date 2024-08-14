@@ -17,10 +17,10 @@ public class StudentRestController {
     private List<Student> allStudent;
     @PostConstruct
     public void loadData(){
-        allStudent = new ArrayList<>();
-        allStudent.add(new Student(1, "Riham", "Katout", "test@gmail.com"));
-        allStudent.add(new Student(2, "Siwar", "Katout", "test2@gmail.com"));
-        allStudent.add(new Student(3, "Ahmad", "Muneer", "test3@gmail.com"));
+//        allStudent = new ArrayList<>();
+//        allStudent.add(new Student(1, "Riham", "Katout", "test@gmail.com"));
+//        allStudent.add(new Student(2, "Siwar", "Katout", "test2@gmail.com"));
+//        allStudent.add(new Student(3, "Ahmad", "Muneer", "test3@gmail.com"));
     }
     @GetMapping("/students")
     public List<Student> getStudents(){
