@@ -30,6 +30,8 @@ public class TrainingApplication {
 //			deleteAllStudents(studentDAO);
 
 			createInstructor(appDAO);
+			System.out.println(findInstructorById(appDAO));
+//			deleteInstructorById(appDAO);
 		};
 	}
 
@@ -92,4 +94,10 @@ public class TrainingApplication {
 		System.out.println(instructor);
 	}
 
+	private Instructor findInstructorById(AppDAO appDAO){
+		return appDAO.findInstructorById(1);
+	}
+	private void deleteInstructorById(AppDAO appDAO){
+		appDAO.deleteInstructorById(3);
+	}
 }

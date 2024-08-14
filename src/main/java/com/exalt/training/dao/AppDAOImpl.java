@@ -19,4 +19,15 @@ public class AppDAOImpl implements AppDAO{
         // this will also save the details object; cascadeType = ALL
         entityManager.persist(instructor);
     }
+
+    @Override
+    public Instructor findInstructorById(Integer id) {
+        return entityManager.find(Instructor.class, id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteInstructorById(Integer id) {
+        entityManager.remove(findInstructorById(id));
+    }
 }
