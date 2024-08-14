@@ -10,4 +10,5 @@ public interface AppDAO {
     Instructor findInstructorById(Integer id);
     void deleteInstructorById(Integer id);
     InstructorDetail findInstructorDetailById(Integer id);
+    Course findCourseAndStudentsByCourseId(Integer id);
 }

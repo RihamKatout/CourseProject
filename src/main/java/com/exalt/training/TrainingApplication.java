@@ -37,7 +37,7 @@ public class TrainingApplication {
 			System.out.println(findInstructorDetailById(appDAO));
  */
 			createCourseAndStudents(appDAO);
-
+			findCourseAndStudents(appDAO);
 		};
 	}
 
@@ -112,7 +112,7 @@ public class TrainingApplication {
 	}
 
 	private void createCourseAndStudents(AppDAO appDAO){
-		Course course = new Course("spring boot course");
+		Course course = new Course("spring boot course14");
 		Student riham = new Student("riham", "katout", "riham@gmail.com");
 		Student siwar = new Student("siwar", "katout", "siwar@gmail.com");
 		course.addStudent(riham);
@@ -121,6 +121,13 @@ public class TrainingApplication {
 		System.out.println("saving the course: " + course);
 		System.out.println("associated students: " + course.getStudents());
 		appDAO.save(course);
+		System.out.println("Dooooooooooooooneeeee");
+	}
+
+	private void findCourseAndStudents(AppDAO appDAO){
+		Course course = appDAO.findCourseAndStudentsByCourseId(1);
+		System.out.println("Found course: " + course);
+		System.out.println("Found course's students: " + course.getStudents());
 		System.out.println("Dooooooooooooooneeeee");
 	}
 }
