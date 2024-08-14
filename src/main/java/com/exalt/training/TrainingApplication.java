@@ -1,6 +1,9 @@
 package com.exalt.training;
 
+import com.exalt.training.dao.AppDAO;
 import com.exalt.training.dao.StudentDAO;
+import com.exalt.training.entity.Instructor;
+import com.exalt.training.entity.InstructorDetail;
 import com.exalt.training.entity.Student;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,7 +19,7 @@ public class TrainingApplication {
 		SpringApplication.run(TrainingApplication.class, args);
 	}
 	@Bean
-	public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
+	public CommandLineRunner commandLineRunner(AppDAO appDAO) {
 		return runner -> {
 //			Integer id = createStudent(studentDAO);
 //			readStudent(studentDAO, id);
@@ -25,6 +28,8 @@ public class TrainingApplication {
 //			updateStudent(studentDAO);
 //			deleteStudentWithId(studentDAO);
 //			deleteAllStudents(studentDAO);
+
+			createInstructor(appDAO);
 		};
 	}
 
@@ -76,4 +81,15 @@ public class TrainingApplication {
 		System.out.println("Deleting student with id = 3");
 		studentDAO.deleteById(3);
 	}
+
+
+	private void createInstructor(AppDAO appDAO) {
+		Instructor instructor = new Instructor("riham", "katout", "test18@gmail.com");
+		InstructorDetail instructorDetail = new InstructorDetail("riham.youtube", "Sleeping");
+		instructor.setInstructorDetail(instructorDetail);
+
+		appDAO.save(instructor);
+		System.out.println(instructor);
+	}
+
 }
