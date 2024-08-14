@@ -43,3 +43,27 @@ CREATE TABLE `roles`(
 ) ENGINE = InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `roles` VALUES ('riham', 'ROLE_ADMIN'), ('ahmad', 'ROLE_EMPLOYEE'), ('siwar', 'ROLE_MANAGER');
+
+
+DROP TABLE IF EXISTS `instructor_details`;
+CREATE TABLE `instructor_details`(
+	`id` INT NOT NULL auto_increment, 
+    `youtube_channel` varchar(128) DEFAULT NULL, 
+    `hobby` varchar(45) DEFAULT NULL, 	
+    PRIMARY KEY(`id`)
+) ENGINE=InnoDB auto_increment=1, DEFAULT charset=latin1;
+
+DROP TABLE IF EXISTS `instructor`;
+CREATE TABLE `instructor`(
+	`id` int(11) NOT NULL,
+    `first_name` VARCHAR(45) DEFAULT NULL, 
+    `last_name` VARCHAR(45) DEFAULT NULL, 
+    `email` VARCHAR(45) DEFAULT NULL,
+    `instructor_detail_id` int(11) DEFAULT NULL, 
+    primary key(`id`), 
+    KEY `FX_detail_idx` (`instructor_detail_id`), constraint `FK_detail` foreign key (`instructor_detail_id`)
+    REFERENCES `instructor_details` (`id`)
+    ON DELETE NO ACTION ON UPDATE NO ACTION 
+) ENGINE=InnoDB auto_increment=1, DEFAULT charset=latin1;
+
+
