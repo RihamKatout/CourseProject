@@ -19,37 +19,37 @@ import javax.sql.DataSource;
 public class DemoSecurityConfig {
 
     @Bean
-//    public InMemoryUserDetailsManager userDetailsManager(){
-//        UserDetails riham = User.builder()
-//                .username("riham")
-//                .password("{noop}1218")
-//                .roles("MANAGER", "ADMIN")
-//                .build();
-//
-//        UserDetails ahmad = User.builder()
-//                .username("ahmad")
-//                .password("{noop}2010")
-//                .roles("EMPLOYEE")
-//                .build();
-//
-//        UserDetails siwar = User.builder()
-//                .username("siwar")
-//                .password("{noop}2021}")
-//                .roles("MANAGER", "EMPLOYEE")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(riham, siwar, ahmad);
-//        //Since we defined our users here, spring will not use users in properties file
-//    }
-    public UserDetailsManager userDetailsManager(DataSource dataSource){
+    public InMemoryUserDetailsManager userDetailsManager(){
+        UserDetails riham = User.builder()
+                .username("riham")
+                .password("{noop}1218")
+                .roles("MANAGER", "ADMIN", "EMPLOYEE")
+                .build();
 
-        // we want to use JDBC authentication, but we don't want to use default tables and columns
-        // give queries to access tables
-        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-        jdbcUserDetailsManager.setUsersByUsernameQuery("select user_id, pw, active from members where user_id=?");
-        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("select user_id, role from roles where user_id=?");
-        return jdbcUserDetailsManager;
+        UserDetails ahmad = User.builder()
+                .username("ahmad")
+                .password("{noop}2010")
+                .roles("EMPLOYEE")
+                .build();
+
+        UserDetails siwar = User.builder()
+                .username("siwar")
+                .password("{noop}2021}")
+                .roles("MANAGER", "EMPLOYEE")
+                .build();
+
+        return new InMemoryUserDetailsManager(riham, siwar, ahmad);
+        //Since we defined our users here, spring will not use users in properties file
     }
+//    public UserDetailsManager userDetailsManager(DataSource dataSource){
+//
+//        // we want to use JDBC authentication, but we don't want to use default tables and columns
+//        // give queries to access tables
+//        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+//        jdbcUserDetailsManager.setUsersByUsernameQuery("select user_id, pw, active from members where user_id=?");
+//        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("select user_id, role from roles where user_id=?");
+//        return jdbcUserDetailsManager;
+//    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
