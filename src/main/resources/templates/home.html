@@ -20,6 +20,14 @@
         <br>
         Role (s): <span sec:authentication="principal.authorities"></span>
     </p>
+
+    <hr>
+    <!-- Add a link for managers -->
+    <p>
+        <a th:href="@{/leaders}">Leadership Meeting</a>
+        (only for managers :) )
+    </p>
+
     <hr>
     <form action="#" th:action="@{/logout}" method="POST">
         <input type="submit" value="Logout"/>
