@@ -32,6 +32,8 @@ public class TrainingApplication {
 			createInstructor(appDAO);
 			System.out.println(findInstructorById(appDAO));
 //			deleteInstructorById(appDAO);
+
+			System.out.println(findInstructorDetailById(appDAO));
 		};
 	}
 
@@ -99,5 +101,9 @@ public class TrainingApplication {
 	}
 	private void deleteInstructorById(AppDAO appDAO){
 		appDAO.deleteInstructorById(3);
+	}
+
+	private InstructorDetail findInstructorDetailById(AppDAO appDAO){
+		return appDAO.findInstructorDetailById(2);
 	}
 }

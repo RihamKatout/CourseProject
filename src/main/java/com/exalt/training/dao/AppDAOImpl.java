@@ -1,6 +1,7 @@
 package com.exalt.training.dao;
 
 import com.exalt.training.entity.Instructor;
+import com.exalt.training.entity.InstructorDetail;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -29,5 +30,10 @@ public class AppDAOImpl implements AppDAO{
     @Transactional
     public void deleteInstructorById(Integer id) {
         entityManager.remove(findInstructorById(id));
+    }
+
+    @Override
+    public InstructorDetail findInstructorDetailById(Integer id) {
+        return entityManager.find(InstructorDetail.class, id);
     }
 }

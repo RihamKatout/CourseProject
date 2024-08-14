@@ -23,6 +23,8 @@ public class InstructorDetail {
     @Column(name = "hobby")
     private String hobby;
 
+    @OneToOne(mappedBy = "instructorDetail", cascade = CascadeType.ALL)
+    private Instructor instructor;
 
     public InstructorDetail(String youtubeChannel, String hobby) {
         this.youtubeChannel = youtubeChannel;
@@ -31,10 +33,11 @@ public class InstructorDetail {
 
     @Override
     public String toString() {
-        return "InstructorDetails{" +
+        return "InstructorDetail{" +
                 "id=" + id +
                 ", youtubeChannel='" + youtubeChannel + '\'' +
                 ", hobby='" + hobby + '\'' +
+                ", instructor=" + instructor +
                 '}';
     }
 }
