@@ -66,4 +66,34 @@ CREATE TABLE `instructor`(
     ON DELETE NO ACTION ON UPDATE NO ACTION 
 ) ENGINE=InnoDB auto_increment=1, DEFAULT charset=latin1;
 
+DROP TABLE IF EXISTS `course`;
+CREATE TABLE `course`(
+	`id` int(11) NOT NULL auto_increment, 
+    `title` VARCHAR(128) default NULL, 
+    `instructor_id` int(11) DEFAULT NULL, 
+    primary key(`id`), 
+    UNIQUE KEY `TITLE_UNIQUE` (`title`), 
+    KEY `FK_INSTRUCTOR_idx` (`instructor_id`),
+    CONSTRAINT `FX_INSTRUCTOR`
+    FOREIGN KEY (`instructor_id`)
+    REFERENCES `instructor` (`id`)
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION
+) ENGINE=InnoDB auto_increment=1, DEFAULT charset=latin1;
 
+DROP TABLE IF EXISTS `course_student`;
+CREATE TABLE `course_student`(
+	`course_id` int(11) NOT NULL, 
+	`student_id` int(11) NOT NULL,
+    PRIMARY KEY (`course_id`, `student_id`), 
+    KEY `FK_COURSE_idx` (`course_id`),
+    CONSTRAINT `FX_COURSE`
+    FOREIGN KEY (`course_id`)
+    REFERENCES `course` (`id`)
+    ON DELETE NO ACTION ON UPDATE NO ACTION, 
+    KEY `FK_STUDENT_idx` (`student_id`),
+    CONSTRAINT `FX_STUDENT`
+    FOREIGN KEY (`student_id`)
+    REFERENCES `student` (`id`)
+    ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB auto_increment=1, DEFAULT charset=latin1;
