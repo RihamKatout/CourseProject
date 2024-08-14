@@ -3,6 +3,7 @@ package com.exalt.training.dao;
 import com.exalt.training.entity.Course;
 import com.exalt.training.entity.Instructor;
 import com.exalt.training.entity.InstructorDetail;
+import com.exalt.training.entity.Student;
 
 public interface AppDAO {
     void save(Instructor instructor);
@@ -11,4 +12,5 @@ public interface AppDAO {
     void deleteInstructorById(Integer id);
     InstructorDetail findInstructorDetailById(Integer id);
     Course findCourseAndStudentsByCourseId(Integer id);
+    Student findStudentAndCoursesByStudentId(Integer id);
 }
