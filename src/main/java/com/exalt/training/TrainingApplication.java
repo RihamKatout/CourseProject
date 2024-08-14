@@ -37,8 +37,9 @@ public class TrainingApplication {
 			System.out.println(findInstructorDetailById(appDAO));
 			createCourseAndStudents(appDAO);
 			findCourseAndStudents(appDAO);
- */
 			findStudentAndCourses(appDAO);
+ */
+			addMoreCoursesToStudent(appDAO);
 		};
 	}
 
@@ -137,5 +138,17 @@ public class TrainingApplication {
 		System.out.println("Found student: " + student);
 		System.out.println("Found student's courses: " + student.getCourses());
 		System.out.println("Dooooooooooooooneeeee");
+	}
+
+	private void addMoreCoursesToStudent(AppDAO appDAO){
+		Student student = appDAO.findStudentAndCoursesByStudentId(14);
+		Course newCourse = new Course("Hope to finish the training");
+		Course newCourse2 = new Course("Hope to finish the training ASAP");
+		student.addSCourse(newCourse);
+		student.addSCourse(newCourse2);
+
+		appDAO.update(student);
+		System.out.println("updated student: " + student);
+		System.out.println("courses: " + student.getCourses());
 	}
 }

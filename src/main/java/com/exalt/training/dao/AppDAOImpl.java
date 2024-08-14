@@ -71,4 +71,10 @@ public class AppDAOImpl implements AppDAO{
         query.setParameter("data", id);
         return query.getSingleResult();
     }
+
+    @Override
+    @Transactional
+    public void update(Student student) {
+        entityManager.merge(student);
+    }
 }
