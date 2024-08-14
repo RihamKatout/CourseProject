@@ -38,8 +38,9 @@ public class TrainingApplication {
 			createCourseAndStudents(appDAO);
 			findCourseAndStudents(appDAO);
 			findStudentAndCourses(appDAO);
- */
 			addMoreCoursesToStudent(appDAO);
+ */
+			deleteCourse(appDAO);
 		};
 	}
 
@@ -150,5 +151,9 @@ public class TrainingApplication {
 		appDAO.update(student);
 		System.out.println("updated student: " + student);
 		System.out.println("courses: " + student.getCourses());
+	}
+
+	private void deleteCourse(AppDAO appDAO){
+		appDAO.deleteCourse(8);
 	}
 }
