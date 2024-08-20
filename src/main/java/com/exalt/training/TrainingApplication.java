@@ -44,6 +44,7 @@ public class TrainingApplication {
 			deleteStudent(appDAO);
  */
 			demoTheBeforeAdvice(accountDAO);
+			demoTheAfterReturningAdvice(accountDAO);
 		};
 	}
 
@@ -166,5 +167,10 @@ public class TrainingApplication {
 
 	private void demoTheBeforeAdvice(AccountDAO accountDAO){
 		accountDAO.addAccount();
+	}
+
+	private void demoTheAfterReturningAdvice(AccountDAO accountDAO){
+		List<String> result = accountDAO.findAccounts();
+		System.out.println("done :)");
 	}
 }
