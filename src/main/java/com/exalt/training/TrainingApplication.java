@@ -1,5 +1,6 @@
 package com.exalt.training;
 
+import com.exalt.training.dao.AccountDAO;
 import com.exalt.training.dao.AppDAO;
 import com.exalt.training.dao.StudentDAO;
 import com.exalt.training.entity.Course;
@@ -20,7 +21,7 @@ public class TrainingApplication {
 		SpringApplication.run(TrainingApplication.class, args);
 	}
 	@Bean
-	public CommandLineRunner commandLineRunner(AppDAO appDAO) {
+	public CommandLineRunner commandLineRunner(AccountDAO accountDAO) {
 		return runner -> {
 //			Integer id = createStudent(studentDAO);
 //			readStudent(studentDAO, id);
@@ -40,8 +41,10 @@ public class TrainingApplication {
 			findStudentAndCourses(appDAO);
 			addMoreCoursesToStudent(appDAO);
 			deleteCourse(appDAO);
- */
 			deleteStudent(appDAO);
+ */
+			demoTheBeforeAdvice(accountDAO);
+			demoTheAfterReturningAdvice(accountDAO);
 		};
 	}
 
@@ -160,5 +163,14 @@ public class TrainingApplication {
 
 	private void deleteStudent(AppDAO appDAO){
 		appDAO.deleteStudent(14);
+	}
+
+	private void demoTheBeforeAdvice(AccountDAO accountDAO){
+		accountDAO.addAccount();
+	}
+
+	private void demoTheAfterReturningAdvice(AccountDAO accountDAO){
+		List<String> result = accountDAO.findAccounts();
+		System.out.println("done :)");
 	}
 }
